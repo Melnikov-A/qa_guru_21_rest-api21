@@ -30,6 +30,7 @@ public class ReqresTest extends TestBase {
                 .body("token", is("QpwL5tke4Pnpja7X4"));
 
     }
+
     @Test
     void listUsersTest() {
 
@@ -62,6 +63,7 @@ public class ReqresTest extends TestBase {
                 .statusCode(204);
 
     }
+
     @Test
     void singleResourceTest() {
 
@@ -75,8 +77,8 @@ public class ReqresTest extends TestBase {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("data.year",is(2001))
-                .body("support.text", is ("To keep ReqRes free, contributions towards server costs are appreciated!"));
+                .body("data.year", is(2001))
+                .body("support.text", is("To keep ReqRes free, contributions towards server costs are appreciated!"));
 
     }
 
