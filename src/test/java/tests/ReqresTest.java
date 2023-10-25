@@ -79,7 +79,7 @@ public class ReqresTest extends TestBase {
     @Test
     void deleteUsersTest() {
 
-        step("Сhecking the response status when deleting a user", () ->
+        step("Сhecking the response status(204) when deleting a user", () ->
                 given(RequestSpec)
                         .when()
                         .delete("/users/2")
