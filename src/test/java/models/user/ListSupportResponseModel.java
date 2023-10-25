@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ListSupportResponseModel {
 
-    String url, text;
+  private String url, text;
 
 }

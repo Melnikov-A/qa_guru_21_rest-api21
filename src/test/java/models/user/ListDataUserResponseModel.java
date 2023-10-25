@@ -7,14 +7,14 @@ import lombok.Data;
 public class ListDataUserResponseModel {
 
     int id;
-    String email;
+    private String email;
 
     @JsonProperty("first_name")
-    String firstName;
+    private String firstName;
 
     @JsonProperty("last_name")
-    String lastName;
+    private String lastName;
 
-    String avatar;
+    private String avatar;
 
 }

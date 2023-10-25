@@ -1,8 +1,8 @@
 package tests;
 
-import models.login.LoginBodyModel;
+import models.login.LoginBodyResponseModel;
 import models.login.LoginResponseModel;
-import models.login.BadResponseModel;
+import models.login.ErrorResponseModel;
 import models.single.MainResourcesResponseModel;
 import models.user.ListDataUserResponseModel;
 import models.user.ListMainUserResponseModel;
@@ -26,7 +26,7 @@ public class ReqresTest extends TestBase {
     @Test
     void successfulLoginTest() {
 
-        LoginBodyModel authData = new LoginBodyModel();
+        LoginBodyResponseModel authData = new LoginBodyResponseModel();
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("pistol");
 
@@ -116,17 +116,17 @@ public class ReqresTest extends TestBase {
     @Test
     void unSuccessfulPasswordTest() {
 
-        LoginBodyModel authData = new LoginBodyModel();
+        LoginBodyResponseModel authData = new LoginBodyResponseModel();
         authData.setEmail("peter@klaven");
 
-        BadResponseModel response = step("Missing password", () ->
+        ErrorResponseModel response = step("Missing password", () ->
                 given(RequestSpec)
                         .body(authData)
                         .when()
                         .post("/login")
                         .then()
                         .spec(badResponseSpec)
-                        .extract().as(BadResponseModel.class));
+                        .extract().as(ErrorResponseModel.class));
         step("Verify response", () ->
                 assertEquals("Missing password", response.getError()));
 

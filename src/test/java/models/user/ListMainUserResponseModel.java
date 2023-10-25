@@ -8,14 +8,14 @@ import java.util.List;
 @Data
 public class ListMainUserResponseModel {
 
-    int page;
+    private int page;
 
     @JsonProperty("per_page")
-    int perPage;
-    int total;
+    private int perPage;
+    private int total;
 
     @JsonProperty("total_pages")
-    int totalPages;
+    private int totalPages;
 
     List<ListDataUserResponseModel> data;
     ListSupportResponseModel support;

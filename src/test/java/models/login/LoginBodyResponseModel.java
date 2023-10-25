@@ -3,7 +3,7 @@ package models.login;
 import lombok.Data;
 
 @Data
-public class LoginBodyModel {
+public class LoginBodyResponseModel {
 
   private String email, password;
 

@@ -3,7 +3,7 @@ package models.login;
 import lombok.Data;
 
 @Data
-public class BadResponseModel {
+public class ErrorResponseModel {
 
   private String error;
 }
