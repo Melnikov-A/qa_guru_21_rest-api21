@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.Specs.*;
 
 @DisplayName("Testing Reqres.in")
-public class ReqresTest extends TestBase {
+public class ReqresTest {
 
     @DisplayName("REGISTER - SUCCESSFUL")
     @Test
@@ -31,12 +31,12 @@ public class ReqresTest extends TestBase {
         authData.setPassword("pistol");
 
         LoginResponseModel response = step("Make login request", () ->
-                given(RequestSpec)
+                given(requestSpec)
                         .body(authData)
                         .when()
                         .post("/login")
                         .then()
-                        .spec(ResponseSpec)
+                        .spec(responseSpecWithCode200)
                         .extract().as(LoginResponseModel.class));
         step("Verify response", () ->
                 assertEquals("QpwL5tke4Pnpja7X4", response.getToken()));
@@ -48,11 +48,11 @@ public class ReqresTest extends TestBase {
     void listUsersTest() {
 
         ListMainUserResponseModel response = step("Requesting User Information", () ->
-                given(RequestSpec)
+                given(requestSpec)
                         .when()
                         .get("/users?page=2")
                         .then()
-                        .spec(ResponseSpec)
+                        .spec(responseSpecWithCode200)
                         .extract().as(ListMainUserResponseModel.class));
         step("Checking the user's main page", () -> {
             assertThat(response.getPage(), equalTo(2));
@@ -79,12 +79,12 @@ public class ReqresTest extends TestBase {
     @Test
     void deleteUsersTest() {
 
-        step("Сhecking the response status(204) when deleting a user", () ->
-                given(RequestSpec)
+        step("Сhecking the response status when deleting a user", () ->
+                given(requestSpec)
                         .when()
                         .delete("/users/2")
                         .then()
-                        .spec(userDeletionResponseSpec));
+                        .spec(responseSpecWithCode204));
 
     }
 
@@ -93,11 +93,11 @@ public class ReqresTest extends TestBase {
     void singleResourceTest() {
 
         MainResourcesResponseModel response = step("User Resources", () ->
-                given(RequestSpec)
+                given(requestSpec)
                 .when()
                 .get("/unknown/2")
                 .then()
-                .spec(ResponseSpec))
+                .spec(responseSpecWithCode200))
                 .extract().as(MainResourcesResponseModel.class);
         step("Checking the user's data resources", () -> {
             assertThat(response.getData().getId(), equalTo(2));
@@ -120,12 +120,12 @@ public class ReqresTest extends TestBase {
         authData.setEmail("peter@klaven");
 
         ErrorResponseModel response = step("Missing password", () ->
-                given(RequestSpec)
+                given(requestSpec)
                         .body(authData)
                         .when()
                         .post("/login")
                         .then()
-                        .spec(badResponseSpec)
+                        .spec(responseSpecWithCode400)
                         .extract().as(ErrorResponseModel.class));
         step("Verify response", () ->
                 assertEquals("Missing password", response.getError()));

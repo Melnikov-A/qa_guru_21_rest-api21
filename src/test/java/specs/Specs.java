@@ -12,7 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Specs extends TestBase {
 
-    public static RequestSpecification RequestSpec = with()
+    public static RequestSpecification requestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
@@ -21,19 +21,19 @@ public class Specs extends TestBase {
             .baseUri(config.baseUrl())
             .basePath(config.basePath());
 
-    public static ResponseSpecification ResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithCode200 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(200)
             .build();
 
-    public static ResponseSpecification userDeletionResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithCode204 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(204)
             .build();
 
-    public static ResponseSpecification badResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpecWithCode400 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(400)
